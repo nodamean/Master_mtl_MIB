@@ -1,42 +1,47 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="mtl_MIB._Default" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        <h3>ระบบเมืองไทย MIB Online</h3>
+        <p class="lead"> </p>
     </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
+  <div class="form-horizontal">
+        <h4> <div class="glyphicon glyphicon-search"></div>ค้นหา</h4>
+        <hr />
+        <asp:ValidationSummary runat="server" CssClass="text-danger" />
+       <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="dryTypeID" CssClass="col-md-2 control-label">ประเภทบัตร</asp:Label>
+            <div class="col-md-10">
+                   <asp:DropDownList ID="dryTypeID" runat="server"  CssClass="col-md-2 control-label">
+                    <asp:ListItem Value="1">บัตรประชาชน</asp:ListItem>
+                    <asp:ListItem Value="2">Passport</asp:ListItem>
+                </asp:DropDownList>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
+        <div class="form-group">
+           <asp:Label runat="server" AssociatedControlID="txtID" CssClass="col-md-2 control-label">หมายเลขระบุตัวตน</asp:Label>
+         
+            <div class="col-md-10">
+                 <asp:TextBox runat="server" ID="txtID" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtID"
+                    CssClass="text-danger" ErrorMessage="กรุณาระบุหมายเลขระบุตัวตน" />      
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
+        <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="txtName" CssClass="col-md-2 control-label">ชื่อ-นามสกุล</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="txtName" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtName"
+                    CssClass="text-danger" ErrorMessage="กรุณาระบุชื่อ" />
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn btn-primary" id="btnSearch">ค้นหา</button>
+            </div>
         </div>
     </div>
-
+       
 </asp:Content>
