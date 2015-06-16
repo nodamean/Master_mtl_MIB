@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mtl_MIB.Membership {
+namespace mtl_MIB.Memberships {
     
     
     public partial class Register {

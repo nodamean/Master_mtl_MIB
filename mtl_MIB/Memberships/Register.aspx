@@ -1,6 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs"  MasterPageFile="~/Site.master" Inherits="mtl_MIB.Membership.Register" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
-  
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="mtl_MIB.Memberships.Register" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <p class="text-danger">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
