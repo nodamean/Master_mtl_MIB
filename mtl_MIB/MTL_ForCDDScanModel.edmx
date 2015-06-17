@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MTL_ForCDDScanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MTL_ForCDDScanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="mtl_Partner">
+          <Key>
+            <PropertyRef Name="PartnerID" />
+          </Key>
+          <Property Name="PartnerID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="mtl_UserProfiles">
           <Key>
             <PropertyRef Name="UserID" />
@@ -16,10 +23,10 @@
           <Property Name="PartnerID" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityContainer Name="MTL_ForCDDScanModelStoreContainer">
+          <EntitySet Name="mtl_Partner" EntityType="Self.mtl_Partner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mtl_UserProfiles" EntityType="Self.mtl_UserProfiles" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MTL_ForCDDScanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -35,7 +42,15 @@
         </EntityType>
         <EntityContainer Name="MTL_ForCDDScanEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="mtl_UserProfiles" EntityType="Self.mtl_UserProfiles" />
+          <EntitySet Name="mtl_Partner" EntityType="MTL_ForCDDScanModel.mtl_Partner" />
         </EntityContainer>
+        <EntityType Name="mtl_Partner">
+          <Key>
+            <PropertyRef Name="PartnerID" />
+          </Key>
+          <Property Name="PartnerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -47,6 +62,14 @@
               <MappingFragment StoreEntitySet="mtl_UserProfiles">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PartnerID" ColumnName="PartnerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mtl_Partner">
+            <EntityTypeMapping TypeName="MTL_ForCDDScanModel.mtl_Partner">
+              <MappingFragment StoreEntitySet="mtl_Partner">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PartnerID" ColumnName="PartnerID" />
               </MappingFragment>

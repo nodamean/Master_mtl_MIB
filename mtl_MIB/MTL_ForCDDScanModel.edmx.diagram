@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="fe3e06d378a14d0a9ac62bafb756f2c7" Name="Diagram1">
         <EntityTypeShape EntityType="MTL_ForCDDScanModel.mtl_UserProfiles" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTL_ForCDDScanModel.mtl_Partner" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

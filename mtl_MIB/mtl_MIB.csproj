@@ -179,6 +179,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="WSForMIB.asmx" />
     <EntityDeploy Include="MTL_ForCDDScanModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MTL_ForCDDScanModel.Designer.cs</LastGenOutput>
@@ -402,6 +403,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MTL_ForCDDScanModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="mtl_Partner.cs">
+      <DependentUpon>MTL_ForCDDScanModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="mtl_UserProfiles.cs">
       <DependentUpon>MTL_ForCDDScanModel.tt</DependentUpon>
     </Compile>
@@ -428,9 +432,12 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WSForMIB.asmx.cs">
+      <DependentUpon>WSForMIB.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

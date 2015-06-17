@@ -26,5 +26,6 @@ namespace mtl_MIB
         }
     
         public virtual DbSet<mtl_UserProfiles> mtl_UserProfiles { get; set; }
+        public virtual DbSet<mtl_Partner> mtl_Partner { get; set; }
     }
 }

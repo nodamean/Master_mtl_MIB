@@ -23,10 +23,17 @@ namespace mtl_MIB.Memberships
                   txtUserName.Text,
                   txtPassword.Text
                   );
-               
+               //Add mtl_profile
+                
                 using (var dbContext = new  MTL_ForCDDScanEntities()){
-                   
-                }
+                    mtl_UserProfiles u = new mtl_UserProfiles();
+                    u.UserID = new Guid();
+                    u.UserName = txtUserName.Text;
+                    u.Description = "ทวีเฮง";
+                    u.PartnerID = "TWH";
+                    dbContext.mtl_UserProfiles.Add(u);
+                    dbContext.SaveChanges();
+                };
 
             }
             catch (MembershipCreateUserException ex)

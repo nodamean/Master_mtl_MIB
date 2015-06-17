@@ -41,6 +41,15 @@ namespace mtl_MIB
                     Path = "~/Scripts/respond.min.js",
                     DebugPath = "~/Scripts/respond.js",
                 });
+
+
+            //ScriptManager.ScriptResourceMapping.AddDefinition(
+            //   "jquery",
+            //   new ScriptResourceDefinition
+            //   {
+            //       Path = "~/Scripts/jquery-1.10.2.js",
+            //       DebugPath = "~/Scripts/jquery-1.10.2.js",
+            //   });
         }
     }
 }

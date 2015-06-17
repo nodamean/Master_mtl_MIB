@@ -1,5 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="mtl_MIB.Memberships.Register" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+﻿<%@ Page Title="" Language="C#"  MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="mtl_MIB.Memberships.Register" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <p class="text-danger">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
@@ -35,9 +36,50 @@
             </div>
         </div>
         <div class="form-group">
+           <asp:Label runat="server" AssociatedControlID="drpPartner" CssClass="col-md-2 control-label">Partner</asp:Label>
+             <div class="col-md-10">
+               <asp:DropDownList runat="server" ID="drpPartner"></asp:DropDownList>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <asp:Button ID="Button1" runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="btn btn-default" />
             </div>
         </div>
-    </div>
+        </div>
+
+    <script>
+        $(document).ready(function () {
+            GetPartner();
+           
+        });
+        function GetPartner() {
+            $.ajax({
+                type: "POST",
+                url: "../WSForMIB.asmx/GetPartner",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: GetPartnerOnSuccess,
+                error: GetPartnerOnError
+            });
+        }
+        function GetPartnerOnSuccess(data, status) {
+            $("#<%=drpPartner.ClientID%>").val('').html('');
+            var obj = data.d;
+            if (obj.length > 0) {
+                $("#<%=drpPartner.ClientID%>").append($("<option></option>").val('00').html('<----เลือกช่องทางPartner---->'));
+                for (var i = 0; i < obj.length; i++) {
+
+                    $("#<%=drpPartner.ClientID%>").append($("<option></option>").val(obj[i].partnerid).html(obj[i].description));
+
+                }
+            }
+        }
+        function GetPartnerOnError(request, status, error) {
+            $("#<%=drpPartner.ClientID%>").append($("<option></option>").val('00').html('<----เลือกช่องทางPartner---->'));
+            alert(error);
+        }
+    </script>
 </asp:Content>
