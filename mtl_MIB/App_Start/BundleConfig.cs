@@ -41,8 +41,20 @@ namespace mtl_MIB
                     Path = "~/Scripts/respond.min.js",
                     DebugPath = "~/Scripts/respond.js",
                 });
-
-
+            ScriptManager.ScriptResourceMapping.AddDefinition(
+               "inputmask",
+               new ScriptResourceDefinition
+               {
+                   Path = "~/Scripts/jquery.inputmask.js",
+                   DebugPath = "~/Scripts/jquery.inputmask.js",
+               });
+            ScriptManager.ScriptResourceMapping.AddDefinition(
+              "validate",
+              new ScriptResourceDefinition
+              {
+                  Path = "~/Scripts/jquery.validate.min.js",
+                  DebugPath = "~/Scripts/jquery.validate.min.js",
+              });
             //ScriptManager.ScriptResourceMapping.AddDefinition(
             //   "jquery",
             //   new ScriptResourceDefinition
