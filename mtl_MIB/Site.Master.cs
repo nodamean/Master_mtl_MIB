@@ -1,76 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Claims;
-using System.Security.Principal;
+using System.Linq;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Collections;
+using System.Web.Security;
+using mtl_MIB;
+using System.Security.Claims;
+using System.Security.Principal;
 
 public partial class SiteMaster : MasterPage
 {
-    private const string AntiXsrfTokenKey = "__AntiXsrfToken";
-    private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
-    private string _antiXsrfTokenValue;
+    public HyperLink HyperLink_MemberName;
 
     protected void Page_Init(object sender, EventArgs e)
     {
-        // The code below helps to protect against XSRF attacks
-        var requestCookie = Request.Cookies[AntiXsrfTokenKey];
-        Guid requestCookieGuidValue;
-        if (requestCookie != null && Guid.TryParse(requestCookie.Value, out requestCookieGuidValue))
+   
+        try
         {
-            // Use the Anti-XSRF token from the cookie
-            _antiXsrfTokenValue = requestCookie.Value;
-            Page.ViewStateUserKey = _antiXsrfTokenValue;
-        }
-        else
-        {
-            // Generate a new Anti-XSRF token and save to the cookie
-            _antiXsrfTokenValue = Guid.NewGuid().ToString("N");
-            Page.ViewStateUserKey = _antiXsrfTokenValue;
+            if (!IsPostBack)
+            {
+                if (Page.User.Identity.Name != null && Page.User.Identity.Name != "")
+                {
+                    MembershipUser membershipUser = Membership.GetUser(Page.User.Identity.Name);
+                    Guid uid = (Guid)membershipUser.ProviderUserKey;
 
-            var responseCookie = new HttpCookie(AntiXsrfTokenKey)
-            {
-                HttpOnly = true,
-                Value = _antiXsrfTokenValue
-            };
-            if (FormsAuthentication.RequireSSL && Request.IsSecureConnection)
-            {
-                responseCookie.Secure = true;
+                    using (var dbContext = new MTL_ForCDDScanEntities())
+                    {
+                        var up = (from u in dbContext.mtl_UserProfiles
+                                  where u.UserID == uid
+                                  select u).FirstOrDefault();
+
+                        HyperLink_MemberName = LoginView1.FindControl("HyperLink_MemberName") as HyperLink;
+
+                        HyperLink_MemberName.Text = "ยินดีต้อนรับ คุณ" + up.UserName + "(" + up.Description + ")";
+                    }
+                }
+                else
+                {
+                    HyperLink_MemberName = LoginView1.FindControl("HyperLink_MemberName") as HyperLink;
+
+                    HyperLink_MemberName.Text = "";
+                }
             }
-            Response.Cookies.Set(responseCookie);
+          
+           
+        }
+        catch(Exception EX)
+        {
         }
 
-        Page.PreLoad += master_Page_PreLoad;
     }
 
-    protected void master_Page_PreLoad(object sender, EventArgs e)
-    {
-        if (!IsPostBack)
-        {
-            // Set Anti-XSRF token
-            ViewState[AntiXsrfTokenKey] = Page.ViewStateUserKey;
-            ViewState[AntiXsrfUserNameKey] = Context.User.Identity.Name ?? String.Empty;
-        }
-        else
-        {
-            // Validate the Anti-XSRF token
-            if ((string)ViewState[AntiXsrfTokenKey] != _antiXsrfTokenValue
-                || (string)ViewState[AntiXsrfUserNameKey] != (Context.User.Identity.Name ?? String.Empty))
-            {
-                throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
-            }
-        }
-    }
+   
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
     }
-
+    
     protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
     {
-        Context.GetOwinContext().Authentication.SignOut();
+        FormsAuthentication.SignOut();
+        FormsAuthentication.RedirectToLoginPage();
     }
 }

@@ -1,7 +1,6 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true"  CodeBehind="~/Site.Master.cs" Inherits="SiteMaster" EnableViewState="false" %>
 
 <!DOCTYPE html>
-
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
@@ -9,7 +8,7 @@
     <title><%: Page.Title %> - ระบบ MIB Online บริษัท เมืองไทยประกันชีวิต จำกัด(มหาชน)</title>
 
     <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
+        <%:Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -45,8 +44,9 @@
                     <div class="container">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
+                                <span class="icon-bar">
+                                
+                                </span>
                                 <span class="icon-bar"></span>
                             </button>
                             <a class="navbar-brand" runat="server" href="~/Images/logo-muangthia.png"><img width="75" height="60"  src="<%=ResolveUrl("~/Images/logo-muangthai.png")%>  "/></a>
@@ -58,23 +58,26 @@
                                 <li><a runat="server" href="~/">Home</a></li>
                                 <li><a runat="server" href="~/Contact">Contact</a></li>
                             </ul>
-                            <asp:LoginView runat="server" ViewStateMode="Disabled">
+                            <asp:LoginView  ID="LoginView1"  runat="server" >
                                 <AnonymousTemplate>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a runat="server" href="~/Account/Register">Register</a></li>
-                                        <li><a runat="server" href="~/Account/Login">Log in</a></li>
+                                        <li><a runat="server" href="~/MemberShips/Login">Log in</a></li>
                                     </ul>
                                 </AnonymousTemplate>
                                 <LoggedInTemplate>
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %>!</a></li>
+                                     <ul class="nav navbar-nav navbar-right">
+                                          <li><asp:HyperLink ID="HyperLink_MemberName" runat="server" NavigateUrl="~/Membership/EditProfile.aspx"></asp:HyperLink></li> 
+                                       <li>  <asp:LoginStatus ID="ctlLogin" runat="server" LoginText="Login" LogoutText="Logout" LogoutPageUrl="~/Memberships/Logout.aspx" LogoutAction="Redirect" /></li>
+                                         <%-- <li><asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" /></li> --%>
+                                     </ul>
+                                          <%-- <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %>!</a></li>
                                         <li>
                                             <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
-                                        </li>
-                                    </ul>
+                                        </li>--%>
+
                                 </LoggedInTemplate>
                             </asp:LoginView>
-                        </div>
+                        </div>  
                     </div>
                 </div>
         <div class="container body-content">
