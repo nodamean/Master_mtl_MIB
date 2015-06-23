@@ -190,14 +190,14 @@
                     rules: {
                         ctl00$MainContent$txtUserName: { required: true },
                         ctl00$MainContent$txtPasswordOld: { required: true },
-                        ctl00$MainContent$txtPasswordNew: { equalTo: "#txtPasswordOld" },
-                        ctl00$MainContent$txtPasswordNewConfirm: { required: true }
+                        ctl00$MainContent$txtPasswordNew: { required: true},
+                        ctl00$MainContent$txtPasswordNewConfirm: {  equalTo: "#txtPasswordNewConfirm" }
                     },
                     messages: {
                         ctl00$MainContent$txtUserName: { required: "*" },
                         ctl00$MainContent$txtPasswordOld: { required: "*" },
                         ctl00$MainContent$txtPasswordNew: "กรุณาระบุรหัสผ่านให้ตรงกัน",
-                        ctl00$MainContent$txtPasswordNewConfirm: { required: "*" }
+                        ctl00$MainContent$txtPasswordNewConfirm:"กรุณาระบุรหัสผ่านให้ตรงกัน"
                         
                     },
                     ignore: "",
