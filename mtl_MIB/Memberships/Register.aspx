@@ -11,16 +11,15 @@
         <%--<asp:ValidationSummary runat="server" CssClass="text-danger" />--%>
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtUserName" CssClass="col-md-3 control-label">User name</asp:Label>
-            <div class="col-md-9">
+            <div class="col-md-5">
                 <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control" placeholder="Username"  />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName"
-                    CssClass="text-danger" ErrorMessage="*" />
-                <label id="lblCheckUsername"></label>
+                    CssClass="text-danger" ErrorMessage="*" /> <label id="lblCheckUsername"></label>
             </div>
         </div>
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtPassword" CssClass="col-md-3 control-label">Password</asp:Label>
-            <div class="col-md-9">
+            <div class="col-md-5">
                 <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control"  placeholder="Password"/>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword"
                     CssClass="text-danger" ErrorMessage="*" />
@@ -28,7 +27,7 @@
         </div>
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtConfirmPassword" CssClass="col-md-3 control-label">Confirm password</asp:Label>
-            <div class="col-md-9">
+            <div class="col-md-5">
                 <asp:TextBox runat="server" ID="txtConfirmPassword" TextMode="Password" CssClass="form-control text-primary"  placeholder="Confirm Password"/>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtConfirmPassword"
                     CssClass="text-danger" Display="Dynamic" ErrorMessage="*" />
@@ -38,14 +37,14 @@
         </div>
         <div class="form-group">
            <asp:Label runat="server" AssociatedControlID="drpPartner" CssClass="col-md-3 control-label">Partner</asp:Label>
-             <div class="col-md-9">
+             <div class="col-md-5">
                <asp:DropDownList runat="server" ID="drpPartner" AutoPostBack="false"   CssClass="form-control text-primary"></asp:DropDownList>
             </div>
                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="drpPartner"
                CssClass="text-danger"  ErrorMessage="*" InitialValue="00"  ></asp:RequiredFieldValidator>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-3 col-md-9">
+            <div class="col-md-offset-3 col-md-5">
                 <button id="btnRegister" class="btn btn-default" >Register</button>
             </div>
         </div>

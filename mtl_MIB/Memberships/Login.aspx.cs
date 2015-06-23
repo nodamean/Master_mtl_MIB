@@ -21,13 +21,18 @@ namespace mtl_MIB.Memberships
             Password = Login_MIB.FindControl("Password") as TextBox;
             RememberMe = Login_MIB.FindControl("RememberMe") as CheckBox;
             FailureText = Login_MIB.FindControl("FailureText") as Literal;
-
+          
             if (!Page.IsPostBack)
             {
                 //if (Request.IsAuthenticated && (!string.IsNullOrEmpty(Request.QueryString["ReturnUrl"])))
                 //{
                 //    Response.Redirect("~/UnauthorizedAccess.aspx");
                 //}
+                MembershipUser u = Membership.GetUser("nodamean");
+                if (Membership.ValidateUser("nodamean", "220349"))
+                {
+                    
+                }
             }
         }
         protected void Login_MIB_Authenticate(object sender, AuthenticateEventArgs e)
@@ -53,7 +58,16 @@ namespace mtl_MIB.Memberships
             }
             else if (Membership.ValidateUser(Login_MIB.UserName, Login_MIB.Password))
             {
-                e.Authenticated = true;
+                if (userInfo.LastPasswordChangedDate.AddDays(-1) < DateTime.Now)
+                {
+                    Login_MIB.Visible = false;
+                    //Change Password When Password Expired
+                }
+                else
+                {
+                    e.Authenticated = true;
+
+                }
             }
             else
             {

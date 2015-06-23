@@ -27,14 +27,64 @@
                     <div class="form-group">
                         <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="เข้าสู่ระบบ" ValidationGroup="Login_MIB" CssClass="btn btn-primary" OnClientClick="FormValidation();" />
 <%--                    <a id="GoToForgotPassword" href="Membership/ForgetPassword.aspx">ลืมรหัสผ่าน?</a>--%>
+                       <a  id="lnkChangePassword"  runat="server" data-toggle="modal" data-target="#mdChangePassword" href="#" class="bth bth-primary">เปลี่ยนรหัสผ่าน</a>
                     </div>
-                    <%--<div>
-                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Membership/Register.aspx">กรณียังไม่เป็นสมาชิก กรุณาสมัครสมาชิกที่นี่</asp:HyperLink>
-                    </div>--%>
+                   
                 </div>
             </div>
             </LayoutTemplate>
         </asp:Login>
+                    <div>
+                   </div>
+
+    <!-- Modal -->
+<div id="mdChangePassword" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">เปลี่ยนรหัสผ่าน</h4> <hr />
+      </div>
+      <div class="modal-body">
+       <div class="row">
+           <div class="col-lg-4"><asp:Label ID="lblUserName" runat="server" AssociatedControlID="txtUserName">ชื่อบัญชีผู้ใช้งาน</asp:Label></div>
+            <div class="col-lg-8"><asp:TextBox ID="txtUserName" runat="server" CssClass="text text-primary" placeholder="UserName" ></asp:TextBox>
+                              <%--  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName" CssClass="text-danger" ErrorMessage="*" />--%>
+            </div>
+       </div>
+        <div class="row">
+            <div class="col-lg-4"><asp:Label ID="lblPasswordOld" runat="server" AssociatedControlID="txtPasswordOld">รหัสผ่านเดิม</asp:Label></div>
+            <div class="col-lg-8"><asp:TextBox ID="txtPasswordOld" runat="server" CssClass="text text-primary"   placeholder="Password" TextMode="Password" MaxLength="13" ></asp:TextBox> 
+                                   <%-- <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPasswordOld" CssClass="text-danger" ErrorMessage="*" />--%>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-lg-4"><asp:Label ID="lblPasswordNew" runat="server" AssociatedControlID="txtPasswordNew">รหัสผ่านใหม่</asp:Label></div>
+            <div class="col-lg-8"><asp:TextBox ID="txtPasswordNew" runat="server" CssClass="text text-primary"   placeholder="New Password" TextMode="Password" MaxLength="13" ></asp:TextBox> 
+                                 <%--  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPasswordNew" CssClass="text-danger" ErrorMessage="*" />--%>
+
+            </div>
+        </div>
+           <div class="row">
+            <div class="col-lg-4"><asp:Label ID="lblPasswordNewConfirm" runat="server" AssociatedControlID="txtPasswordNewConfirm">ยืนยันรหัสผ่านใหม่</asp:Label></div>
+            <div class="col-lg-8"><asp:TextBox ID="txtPasswordNewConfirm" runat="server" CssClass="text text-primary"   placeholder="Confirm New Password" TextMode="Password" MaxLength="13" ></asp:TextBox>
+                                 <%--<asp:RequiredFieldValidator runat="server" ControlToValidate="txtPasswordNewConfirm" CssClass="text-danger" ErrorMessage="*" />
+                                 <asp:CompareValidator runat="server" ControlToCompare="txtPasswordNew" ControlToValidate="txtPasswordNewConfirm"
+                                    CssClass="text-danger" Display="Dynamic" ErrorMessage="กรุณาระบุรหัสผ่านให้ตรงกัน" />--%>
+             </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+     <%--    <button id="btnChangePassword" class="btn btn-primary" >Save</button>--%>
+          <asp:Button ID="btnChangePassword" runat="server"  Text="Save" CssClass="btn btn-primary"/>
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
    <%-- <div class="row">
         <div class="col-md-8">
             <section id="loginForm">
@@ -120,4 +170,55 @@
             alert(error);
         }
     </script>--%>
+
+    <script type="text/javascript">
+        var theForm = document.forms['aspnetForm'];
+        $(document).ready(function () {
+            $("#<%=UserName.ClientID%>").change(function () {
+                $("#<%=txtUserName.ClientID%>").val();
+                $("#<%=txtUserName.ClientID%>").val($("#<%=UserName.ClientID%>").val());
+            });
+            $("#<%=btnChangePassword.ClientID%>").click(function () {
+                
+                validateForm();
+                if ($("#form1").valid()) {
+                }
+            });
+            function validateForm() {
+
+                $("#ctl01").validate({
+                    rules: {
+                        ctl00$MainContent$txtUserName: { required: true },
+                        ctl00$MainContent$txtPasswordOld: { required: true },
+                        ctl00$MainContent$txtPasswordNew: { equalTo: "#txtPasswordOld" },
+                        ctl00$MainContent$txtPasswordNewConfirm: { required: true }
+                    },
+                    messages: {
+                        ctl00$MainContent$txtUserName: { required: "*" },
+                        ctl00$MainContent$txtPasswordOld: { required: "*" },
+                        ctl00$MainContent$txtPasswordNew: "กรุณาระบุรหัสผ่านให้ตรงกัน",
+                        ctl00$MainContent$txtPasswordNewConfirm: { required: "*" }
+                        
+                    },
+                    ignore: "",
+                    // errorClass: 'fieldError',
+                    onkeyup: false,
+                    onblur: false,
+                    errorElement: 'label',
+                    submitHandler: function () {
+                        alert("alert");
+                    }
+                    , errorPlacement: function (error, element) {
+                        if (element.is(":radio")) {
+                            error.insertBefore("#Titleerror");
+                        }
+                        else { // This is the default behavior 
+                            error.insertAfter(element);
+                        }
+                    }
+                });
+            }
+        });
+   </script>
+
 </asp:Content>
