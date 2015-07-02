@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="เข้าสู่ระบบ" ValidationGroup="Login_MIB" CssClass="btn btn-primary" OnClientClick="FormValidation();" />
 <%--                    <a id="GoToForgotPassword" href="Membership/ForgetPassword.aspx">ลืมรหัสผ่าน?</a>--%>
-                       <a  id="lnkChangePassword"  runat="server" data-toggle="modal" data-target="#mdChangePassword" href="#" class="bth bth-primary">เปลี่ยนรหัสผ่าน</a>
+                       <a  id="lnkChangePassword"  runat="server" data-toggle="modal" data-target="#mdChangePassword" href="#" class="bth bth-primary" visible="false">เปลี่ยนรหัสผ่าน</a>
                     </div>
                    
                 </div>
@@ -45,7 +45,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">เปลี่ยนรหัสผ่าน</h4> <hr />
+        <h4 class="modal-title">รหัสผ่านหมดอายุแล้ว กรุณาเปลี่ยนรหัสผ่านใหม่</h4> <hr />
       </div>
       <div class="modal-body">
        <div class="row">
@@ -54,167 +54,102 @@
                               <%--  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName" CssClass="text-danger" ErrorMessage="*" />--%>
             </div>
        </div>
-        <div class="row">
+       <div class="row">
             <div class="col-lg-4"><asp:Label ID="lblPasswordOld" runat="server" AssociatedControlID="txtPasswordOld">รหัสผ่านเดิม</asp:Label></div>
             <div class="col-lg-8"><asp:TextBox ID="txtPasswordOld" runat="server" CssClass="text text-primary"   placeholder="Password" TextMode="Password" MaxLength="13" ></asp:TextBox> 
                                    <%-- <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPasswordOld" CssClass="text-danger" ErrorMessage="*" />--%>
             </div>
         </div>
-         <div class="row">
+       <div class="row">
             <div class="col-lg-4"><asp:Label ID="lblPasswordNew" runat="server" AssociatedControlID="txtPasswordNew">รหัสผ่านใหม่</asp:Label></div>
             <div class="col-lg-8"><asp:TextBox ID="txtPasswordNew" runat="server" CssClass="text text-primary"   placeholder="New Password" TextMode="Password" MaxLength="13" ></asp:TextBox> 
                                  <%--  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPasswordNew" CssClass="text-danger" ErrorMessage="*" />--%>
 
             </div>
         </div>
-           <div class="row">
-            <div class="col-lg-4"><asp:Label ID="lblPasswordNewConfirm" runat="server" AssociatedControlID="txtPasswordNewConfirm">ยืนยันรหัสผ่านใหม่</asp:Label></div>
-            <div class="col-lg-8"><asp:TextBox ID="txtPasswordNewConfirm" runat="server" CssClass="text text-primary"   placeholder="Confirm New Password" TextMode="Password" MaxLength="13" ></asp:TextBox>
-                                 <%--<asp:RequiredFieldValidator runat="server" ControlToValidate="txtPasswordNewConfirm" CssClass="text-danger" ErrorMessage="*" />
-                                 <asp:CompareValidator runat="server" ControlToCompare="txtPasswordNew" ControlToValidate="txtPasswordNewConfirm"
-                                    CssClass="text-danger" Display="Dynamic" ErrorMessage="กรุณาระบุรหัสผ่านให้ตรงกัน" />--%>
-             </div>
-        </div>
+       <div class="row">
+                <div class="col-lg-4"><asp:Label ID="lblPasswordNewConfirm" runat="server" AssociatedControlID="txtPasswordNewConfirm">ยืนยันรหัสผ่านใหม่</asp:Label></div>
+                <div class="col-lg-8"><asp:TextBox ID="txtPasswordNewConfirm" runat="server" CssClass="text text-primary"   placeholder="Confirm New Password" TextMode="Password" MaxLength="13" ></asp:TextBox>                
+            </div>
+            </div>
+         <div class="row">
+                <div class="col-lg-12"><span class="text text-success" id="span_result"></span><span class="text text-danger" id="span_result_error"></span></div>
+            </div>
       </div>
       <div class="modal-footer">
-     <%--    <button id="btnChangePassword" class="btn btn-primary" >Save</button>--%>
+     
           <asp:Button ID="btnChangePassword" runat="server"  Text="Save" CssClass="btn btn-primary"/>
            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-    </div>
+    
 
   </div>
 </div>
-   <%-- <div class="row">
-        <div class="col-md-8">
-            <section id="loginForm">
-                <div class="form-horizontal">
-                    <h4>Use a local account to log in.</h4>
-                    <hr />
-                    <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
-                        <p class="text-danger">
-                            <asp:Literal runat="server" ID="FailureText" />
-                        </p>
-                    </asp:PlaceHolder>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtUserName" CssClass="col-md-2 control-label">UserName</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control"  />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName"
-                                CssClass="text-danger" ErrorMessage="*" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="*" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                <asp:CheckBox runat="server" ID="RememberMe" />
-                                <asp:Label runat="server" AssociatedControlID="RememberMe">Remember me?</asp:Label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                          
-                            <button id="btnLogin" class="btn btn-default" >Log in</button>
-                        </div>
-                    </div>
-                </div>
-             
-                
-            </section>
-        </div>
-    </div>--%>
-  <%--  <script type="text/javascript">
-        $(document).ready(function () {
-
-            $("#btnLogin").click(function () {
-                username = $("#<%=txtUserName.ClientID%>").val();
-                Login(username);
-            });
-        });
-
-        function Login(username) {
-            $.ajax({
-                type: "POST",
-                url: "../WSForMIB.asmx/Login",
-                data: "{username:'"+username+"'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false,
-                success: LoginOnSuccess,
-                error: LoginOnError
-            });
-        }
-        function LoginOnSuccess(data, status) {
-            var obj = data.d;
-            if (obj.length > 0) {
-                for (var i = 0; i < obj.length; i++) {
-                    if (obj[i].fld_result == "found") {
-                        alert(obj[i].username + obj[i].partnerid + obj[i].partnerdesc);
-                    }
-                    else {
-                        alert('ไม่พบUser');
-                    }
-
-                }
-            }
-        }
-        function LoginOnError(request, status, error) {
-            alert(error);
-        }
-    </script>--%>
+</div>
 
     <script type="text/javascript">
         var theForm = document.forms['aspnetForm'];
         $(document).ready(function () {
+            $("#span_result").html('');
+            $("#span_result_error").html('');
             $("#<%=UserName.ClientID%>").change(function () {
                 $("#<%=txtUserName.ClientID%>").val();
                 $("#<%=txtUserName.ClientID%>").val($("#<%=UserName.ClientID%>").val());
             });
+            $('#mdChangePassword').modal({
+                show:  <%= showDialog %>});
+ 
             $("#<%=btnChangePassword.ClientID%>").click(function () {
-                
                 validateForm();
-                if ($("#form1").valid()) {
+                if ($("#ctl01").valid()) {
+                  result =  ChangePassword($("#<%=txtUserName.ClientID%>").val(), $("#<%=txtPasswordOld.ClientID%>").val(), $("#<%=txtPasswordNew.ClientID%>").val());
+                    if (result == "completed") {
+                        $("#span_result").html("เปลี่ยนรหัสผ่านเรียบร้อยแล้ว รหัสผ่านใหม่ของท่าน คือ "+ $("#<%=txtPasswordNew.ClientID%>").val());
+                        return false;
+                    }
+                    else {
+
+                        $("#span_result_error").html("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง กรุณากรอกใหม่");
+                        return false;
+                    }
                 }
             });
+
+            function ChangePassword(username, passwordOld, passwordNew) {
+                var result;
+                $.ajax({
+                    type: "POST",
+                    url: "../WSForMIB.asmx/ChangePassword",
+                    data: "{username:'" + username + "' , passwordOld:'" + passwordOld + "', passwordNew:'" + passwordNew + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (data, status) { result = ChangePasswordOnSuccess(data, status) },
+                    error: ChangePasswordOnError
+                });
+                return result;
+            }
+            function  ChangePasswordOnSuccess(data, status) {
+                    return data.d;
+               
+            }
+            function ChangePasswordOnError(request, status, error) {
+                alert(error);
+            }
             function validateForm() {
 
                 $("#ctl01").validate({
                     rules: {
                         ctl00$MainContent$txtUserName: { required: true },
                         ctl00$MainContent$txtPasswordOld: { required: true },
-                        ctl00$MainContent$txtPasswordNew: { required: true},
-                        ctl00$MainContent$txtPasswordNewConfirm: {  equalTo: "#txtPasswordNewConfirm" }
+                        ctl00$MainContent$txtPasswordNew: { required: true, minlength: 4},
+                        ctl00$MainContent$txtPasswordNewConfirm: { required: true,minlength:4,equalTo: "#<%=txtPasswordNew.ClientID%>" }
                     },
                     messages: {
                         ctl00$MainContent$txtUserName: { required: "*" },
                         ctl00$MainContent$txtPasswordOld: { required: "*" },
-                        ctl00$MainContent$txtPasswordNew: "กรุณาระบุรหัสผ่านให้ตรงกัน",
-                        ctl00$MainContent$txtPasswordNewConfirm:"กรุณาระบุรหัสผ่านให้ตรงกัน"
-                        
-                    },
-                    ignore: "",
-                    // errorClass: 'fieldError',
-                    onkeyup: false,
-                    onblur: false,
-                    errorElement: 'label',
-                    submitHandler: function () {
-                        alert("alert");
-                    }
-                    , errorPlacement: function (error, element) {
-                        if (element.is(":radio")) {
-                            error.insertBefore("#Titleerror");
-                        }
-                        else { // This is the default behavior 
-                            error.insertAfter(element);
-                        }
+                        ctl00$MainContent$txtPasswordNew: { required: "*", minlength: "กรุณาระบุรหัสผ่านอย่างน้อย 4 ตัวขึ้นไป" },
+                        ctl00$MainContent$txtPasswordNewConfirm: { required: "*" ,minlength:"กรุณาระบุรหัสผ่านอย่างน้อย 4 ตัวขึ้นไป", equalTo:"กรุณาระบุรหัสผ่านที่ตรงกัน" }
                     }
                 });
             }

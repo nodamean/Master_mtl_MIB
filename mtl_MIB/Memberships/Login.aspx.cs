@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -15,15 +16,17 @@ namespace mtl_MIB.Memberships
         public TextBox Password;
         public CheckBox RememberMe;
         public Literal FailureText;
+        public int showDialog;
         protected void Page_Load(object sender, EventArgs e)
         {
             UserName = Login_MIB.FindControl("UserName") as TextBox;
             Password = Login_MIB.FindControl("Password") as TextBox;
             RememberMe = Login_MIB.FindControl("RememberMe") as CheckBox;
             FailureText = Login_MIB.FindControl("FailureText") as Literal;
-          
+            showDialog = 0;
             if (!Page.IsPostBack)
             {
+               
                 //if (Request.IsAuthenticated && (!string.IsNullOrEmpty(Request.QueryString["ReturnUrl"])))
                 //{
                 //    Response.Redirect("~/UnauthorizedAccess.aspx");
@@ -58,10 +61,14 @@ namespace mtl_MIB.Memberships
             }
             else if (Membership.ValidateUser(Login_MIB.UserName, Login_MIB.Password))
             {
-                if (userInfo.LastPasswordChangedDate.AddDays(-1) < DateTime.Now)
+                string expireDate = ConfigurationManager.AppSettings["ExpireDate"];
+
+                if (userInfo.LastPasswordChangedDate.AddDays(Convert.ToInt32(expireDate)) < DateTime.Now)
                 {
-                    Login_MIB.Visible = false;
+                    DateTime dt = userInfo.LastPasswordChangedDate;
                     //Change Password When Password Expired
+                    showDialog = 1;
+
                 }
                 else
                 {

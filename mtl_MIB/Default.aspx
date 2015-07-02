@@ -23,7 +23,7 @@
            <asp:Label runat="server" AssociatedControlID="txtID" CssClass="col-md-2 control-label">หมายเลขระบุตัวตน</asp:Label>
          
             <div class="col-md-10">
-                 <asp:TextBox runat="server" ID="txtID" CssClass="form-control" />
+                 <asp:TextBox runat="server" ID="txtID" CssClass="form-control"  MaxLength="13"/>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtID"
                     CssClass="text-danger" ErrorMessage="กรุณาระบุหมายเลขระบุตัวตน" />      
             </div>
@@ -44,4 +44,43 @@
         </div>
     </div>
        
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //Check ID Card
+            $("#<%=dryTypeID.ClientID%>").change(function () {
+                var typeID = $("#<%=dryTypeID.ClientID %> option:selected").text();
+                if (typeID == "Passport") {
+                    $("#<%=txtID.ClientID%>").val('');
+                    $("#<%=txtID.ClientID%>").attr('maxlength', '');
+                }
+                else { //ID Card
+                    $("#<%=txtID.ClientID%>").val('');
+                    $("#<%=txtID.ClientID%>").attr('maxlength', '13');
+                 
+
+                }
+
+            });
+            $("#btnSearch").click(function () {
+                validateForm();
+                if ($("#ctl01").valid()) {
+                }
+            });
+            function CheckID() {
+
+            }
+
+            function validateForm() {
+
+                $("#ctl01").validate({
+                    rules: {
+                        ctl00$MainContent$txtID: { required: true ,minlength: 13 }
+                    },
+                    messages: {
+                        ctl00$MainContent$txtID: { required: "*", minlength: "กรุณาระบุบัตรประชาชนให้ถูกต้อง" }
+                    }
+                });
+            }
+        });
+    </script>
 </asp:Content>

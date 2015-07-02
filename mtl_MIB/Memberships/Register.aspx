@@ -13,26 +13,26 @@
             <asp:Label runat="server" AssociatedControlID="txtUserName" CssClass="col-md-3 control-label">User name</asp:Label>
             <div class="col-md-5">
                 <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control" placeholder="Username"  />
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName"
-                    CssClass="text-danger" ErrorMessage="*" /> <label id="lblCheckUsername"></label>
+               <%-- <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName"
+                    CssClass="text-danger" ErrorMessage="*" /> <label id="lblCheckUsername"></label>--%>
             </div>
         </div>
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtPassword" CssClass="col-md-3 control-label">Password</asp:Label>
             <div class="col-md-5">
                 <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control"  placeholder="Password"/>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword"
-                    CssClass="text-danger" ErrorMessage="*" />
+                <%--<asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword"
+                    CssClass="text-danger" ErrorMessage="*" />--%>
             </div>
         </div>
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtConfirmPassword" CssClass="col-md-3 control-label">Confirm password</asp:Label>
             <div class="col-md-5">
                 <asp:TextBox runat="server" ID="txtConfirmPassword" TextMode="Password" CssClass="form-control text-primary"  placeholder="Confirm Password"/>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtConfirmPassword"
-                    CssClass="text-danger" Display="Dynamic" ErrorMessage="*" />
-                <asp:CompareValidator runat="server" ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword"
-                    CssClass="text-danger" Display="Dynamic" ErrorMessage="กรุณาระบุรหัสผ่านให้ตรงกัน" />
+               <%-- <asp:RequiredFieldValidator runat="server" ControlToValidate="txtConfirmPassword"
+                    CssClass="text-danger" Display="Dynamic" ErrorMessage="*" />--%>
+                <%--<asp:CompareValidator runat="server" ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword"
+                    CssClass="text-danger" Display="Dynamic" ErrorMessage="กรุณาระบุรหัสผ่านให้ตรงกัน" />--%>
             </div>
         </div>
         <div class="form-group">
@@ -40,8 +40,8 @@
              <div class="col-md-5">
                <asp:DropDownList runat="server" ID="drpPartner" AutoPostBack="false"   CssClass="form-control text-primary"></asp:DropDownList>
             </div>
-               <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="drpPartner"
-               CssClass="text-danger"  ErrorMessage="*" InitialValue="00"  ></asp:RequiredFieldValidator>
+             <%--  <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="drpPartner"
+               CssClass="text-danger"  ErrorMessage="*" InitialValue="00"  ></asp:RequiredFieldValidator>--%>
         </div>
         <div class="form-group">
             <div class="col-md-offset-3 col-md-5">
@@ -62,14 +62,49 @@
             });
 
             $("#btnRegister").click(function () {
-                //alert($("#<%=txtUserName.ClientID%>").val() + $("#<%=txtPassword.ClientID%>").val() + $("#<%=drpPartner.ClientID %> option:selected").val() + $("#<%=drpPartner.ClientID %> option:selected").text());
-                username = $("#<%=txtUserName.ClientID%>").val();
-                password = $("#<%=txtPassword.ClientID%>").val();
-                partnerid = $("#<%=drpPartner.ClientID %> option:selected").val();
-                partnerdesc = $("#<%=drpPartner.ClientID %> option:selected").text();
-                SaveRegister(username, password, partnerid, partnerdesc);
+                validateForm()
+                if ($("#ctl01").valid()) {
+                    username = $("#<%=txtUserName.ClientID%>").val();
+                    password = $("#<%=txtPassword.ClientID%>").val();
+                    partnerid = $("#<%=drpPartner.ClientID %> option:selected").val();
+                    partnerdesc = $("#<%=drpPartner.ClientID %> option:selected").text();
+                    SaveRegister(username, password, partnerid, partnerdesc);
+                }
             });
-           
+            jQuery.validator.addMethod(
+            "selectNone",
+            function (value, element) {
+                if (element.value == "00" || element.value == "") {
+                    return false;
+                }
+                else return true;
+            },
+            "*"
+          );
+           function validateForm() {
+
+                $("#ctl01").validate({
+                    rules: {
+                        ctl00$MainContent$txtUserName: { required: true },
+                        ctl00$MainContent$txtPassword: { required: true, minlength: 4 },
+                        ctl00$MainContent$txtConfirmPassword: { required: true, minlength: 4, equalTo: "#<%=txtPassword.ClientID%>" },
+                        ctl00$MainContent$drpPartner: { selectNone: true },
+                    },
+                    messages: {
+                        ctl00$MainContent$txtUserName: { required: "*" },
+                        ctl00$MainContent$txtPassword: { required: "*", minlength: "กรุณาระบุรหัสผ่านอย่างน้อย 4 ตัวขึ้นไป" },
+                        ctl00$MainContent$txtConfirmPassword: { required: "*", minlength: "กรุณาระบุรหัสผ่านอย่างน้อย 4 ตัวขึ้นไป", equalTo: "กรุณาระบุรหัสผ่านที่ตรงกัน" }
+                        
+                    }
+                    ,
+                    ignore: "",
+                    errorClass: 'text-danger',
+                    onkeyup: false,
+                    onblur: false
+                   
+                    
+                });
+            }
         });
         function IsUserExist(username) {
             var result;
