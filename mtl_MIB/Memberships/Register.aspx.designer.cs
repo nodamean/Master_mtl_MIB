@@ -31,24 +31,6 @@ namespace mtl_MIB.Memberships {
         protected global::System.Web.UI.WebControls.TextBox txtUserName;
         
         /// <summary>
-        /// txtPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
-        
-        /// <summary>
-        /// txtConfirmPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
-        
-        /// <summary>
         /// drpPartner control.
         /// </summary>
         /// <remarks>
@@ -56,5 +38,14 @@ namespace mtl_MIB.Memberships {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpPartner;
+        
+        /// <summary>
+        /// txtDes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDes;
     }
 }

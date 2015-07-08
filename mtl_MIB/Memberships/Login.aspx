@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"  CodeBehind="Login.aspx.cs" Inherits="mtl_MIB.Memberships.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-     <h2>Login</h2>
      <asp:Login Width="100%" ID="Login_MIB" runat="server" OnAuthenticate="Login_MIB_Authenticate" DestinationPageUrl="~/Default.aspx">
             <LayoutTemplate>
             <h2>เข้าสู่ระบบ</h2>
