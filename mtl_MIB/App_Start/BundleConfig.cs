@@ -55,6 +55,14 @@ namespace mtl_MIB
                   Path = "~/Scripts/jquery.validate.min.js",
                   DebugPath = "~/Scripts/jquery.validate.min.js",
               });
+
+            ScriptManager.ScriptResourceMapping.AddDefinition(
+             "dataTables",
+             new ScriptResourceDefinition
+             {
+                 Path="~/Scripts/dataTables.min.js",
+                 DebugPath = "~/Scripts/dataTables.min.js",
+             });
             //ScriptManager.ScriptResourceMapping.AddDefinition(
             //   "jquery",
             //   new ScriptResourceDefinition

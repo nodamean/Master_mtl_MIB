@@ -15,6 +15,7 @@
         <!-- Custom CSS -->
     <link href="content/logo-nav.css" rel="stylesheet">
     <link href="content/bootstrap.css" rel="stylesheet">
+    <link href="content/dataTables.min.css" rel="stylesheet">
 </head>
 <body>
     <form runat="server">
@@ -28,6 +29,8 @@
                 <asp:ScriptReference Name="respond" />
                 <asp:ScriptReference Name="validate" />
                 <asp:ScriptReference Name="inputmask" />
+                <asp:ScriptReference Name="dataTables" />
+
                 <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
                 <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
                 <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
