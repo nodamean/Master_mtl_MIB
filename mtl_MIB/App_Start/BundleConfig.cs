@@ -63,13 +63,13 @@ namespace mtl_MIB
                  Path="~/Scripts/dataTables.min.js",
                  DebugPath = "~/Scripts/dataTables.min.js",
              });
-            //ScriptManager.ScriptResourceMapping.AddDefinition(
-            //   "jquery",
-            //   new ScriptResourceDefinition
-            //   {
-            //       Path = "~/Scripts/jquery-1.10.2.js",
-            //       DebugPath = "~/Scripts/jquery-1.10.2.js",
-            //   });
+            ScriptManager.ScriptResourceMapping.AddDefinition(
+               "jquery",
+               new ScriptResourceDefinition
+               {
+                   Path = "~/Scripts/jquery-1.11.3.min.js",
+                   DebugPath = "~/Scripts/jquery-1.11.3.min.js",
+               });
         }
     }
 }

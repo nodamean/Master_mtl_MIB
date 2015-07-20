@@ -210,6 +210,27 @@
       <DependentUpon>MTL_ForCDDScanModel.edmx</DependentUpon>
       <LastGenOutput>MTL_ForCDDScanModel.cs</LastGenOutput>
     </Content>
+    <EntityDeploy Include="MTL_CDDGatewayWSLogModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MTL_CDDGatewayWSLogModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="MTL_CDDGatewayWSLogModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MTL_CDDGatewayWSLogModel.edmx</DependentUpon>
+      <LastGenOutput>MTL_CDDGatewayWSLogModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MTL_CDDGatewayWSLogModel.edmx.diagram">
+      <DependentUpon>MTL_CDDGatewayWSLogModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="MTL_CDDGatewayWSLogModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MTL_CDDGatewayWSLogModel.edmx</DependentUpon>
+      <LastGenOutput>MTL_CDDGatewayWSLogModel.cs</LastGenOutput>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -252,6 +273,11 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="Web References\WS_Admin_ForMIB\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\WS_Admin_ForMIB\WS_Admin_ForMIB.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -389,6 +415,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Culture.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -428,6 +455,21 @@
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="MTL_CDDGatewayWSLogModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MTL_CDDGatewayWSLogModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MTL_CDDGatewayWSLogModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MTL_CDDGatewayWSLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MTL_CDDGatewayWSLogModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MTL_CDDGatewayWSLogModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="MTL_ForCDDScanModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -450,6 +492,11 @@
       <DependentUpon>MTL_ForCDDScanModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -479,9 +526,18 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WatchListWSLog.cs" />
+    <Compile Include="Web References\WS_Admin_ForMIB\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="WSForMIB.asmx.cs">
       <DependentUpon>WSForMIB.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WSLog.cs">
+      <DependentUpon>MTL_CDDGatewayWSLogModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -493,6 +549,22 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="C:\Users\mtl87022\Source\Repos\mtl_MIB\mtl_MIB\WS_Admin_ForMIB.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WS_Admin_ForMIB\</RelPath>
+      <UpdateFromURL>C:\Users\mtl87022\Source\Repos\mtl_MIB\mtl_MIB\WS_Admin_ForMIB.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>mtl_MIB_WS_Admin_ForMIB_WS_Admin_ForMIBService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
