@@ -1,17 +1,31 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="mtl_MIB.Memberships.Manage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      <div class="form-group">
+         <div class="col-lg-12"><button id="btnCreateUser" class="btn btn-primary" >
+             <div class="glyphicon glyphicon-user"></div>สร้างผู้ใช้งานใหม่</button>
+         </div>
+         <div class="col-lg-12">
+             <br />
+         </div>
         <div class="col-md-12">
-      
-
-            <asp:GridView ID="GridView1" runat="server"  OnPreRender="GridView1_PreRender" 
+             <asp:Table ID="TableShowReport" runat="server" CssClass="table table-striped table-hover">
+            <asp:TableHeaderRow TableSection="TableHeader">
+                <asp:TableHeaderCell></asp:TableHeaderCell>
+                <asp:TableHeaderCell>ลำดับ </asp:TableHeaderCell>
+                <asp:TableHeaderCell>ชื่อบัญชีผู้ใช้งาน</asp:TableHeaderCell>
+                <asp:TableHeaderCell>คำอธิบายอื่นๆ</asp:TableHeaderCell>
+                <asp:TableHeaderCell>Partner</asp:TableHeaderCell>
+            </asp:TableHeaderRow>
+        </asp:Table>
+            <%--<asp:GridView ID="GridView1" runat="server"  OnPreRender="GridView1_PreRender" 
                 CssClass="table table-hover table-responsive  cell-border table-bordered bg-success" AutoGenerateColumns="False" >
                <Columns>
-                       <asp:TemplateField HeaderText="" ItemStyle-Font-Bold="true" >
-                        <ItemTemplate>                  
+                        <asp:TemplateField HeaderText="" ItemStyle-Font-Bold="true" >
+                       <ItemTemplate>                  
                             <button id="btnEdit">Edit</button>
                         </ItemTemplate>
-                        </asp:TemplateField>      
+                        </asp:TemplateField> 
+                     <asp:BoundField HeaderText="" DataField="btn" />
                        <asp:TemplateField HeaderText="ลำดับ" ItemStyle-Font-Bold="true" >
                         <ItemTemplate>                  
                         <%# Container.DataItemIndex + 1 %>
@@ -24,13 +38,13 @@
                     <asp:BoundField HeaderText="Partner" DataField="partnerid" />
                 </Columns>
                 
-            </asp:GridView>
+            </asp:GridView>--%>
            
             </div>
   
         </div>
 <!-- Modal -->
-<div id="mdChangePassword" class="modal fade" role="dialog">
+<div id="mdChangePassword" class="modal fade"   tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -92,14 +106,83 @@
 </div>
 
  <script type="text/javascript">
+     function GetProfileByID(User) {
+         $("#showresult").html("");
+         $.ajax({
+             type: "POST",
+             url: "../WSForMIB.asmx/GetProfileByID",
+             data: "{User:'" + User + "'}",
+             contentType: "application/json; charset=utf-8",
+             dataType: "json",
+             success: GetProfileByIDResultOnSuccess,
+             error: GetProfileByIDResultOnError
+         });
+     }
+
+     function GetProfileByIDResultOnSuccess(data, status) {
+
+         var obj = data.d;
+        
+          if (obj.length > 0) {
+
+              for (var i = 0; i < obj.length; i++) {
+                
+                   if (obj[i].fld_result.trim() == "found") {
+            
+          
+            $('#<%=txtUserName.ClientID %>').val(obj[i].username);
+             $('#<%=txtDesc.ClientID %>').val(obj[i].partnerdesc);
+             $('#<%=txtPartner.ClientID %>').val(obj[i].partnerid);
+
+             if (obj[i].status == "Active") {
+                 $('#<%=DropDownStatus.ClientID %>').val(obj[i].status).attr('selected', true);
+             }
+             else if (obj[i].status == "UnActive") {
+                 $('#<%=DropDownStatus.ClientID %>').val(obj[i].status).attr('selected', true);
+            }
+             else if (obj[i].status == "Locked") {
+                 $('#<%=DropDownStatus.ClientID %>').val(obj[i].status).attr('selected', true);
+
+          }
+          }
+              }
+          }
+         
+
+     }
+     function GetProfileByIDResultOnError(request, status, error) {
+         $(".showresult").html(request.statusText);
+     }
      $(document).ready(function () {
+         
          var status1 = "";
          $("#result_password").text('');
          $("#btnEdit").click(function () {
              $('#mdChangePassword').modal({
                  show: true
              });
-             $("#<%=GridView1.ClientID%> tr:has(td)").each(function () {
+             var productsTable = $('#<%=TableShowReport.ClientID %>').dataTable({
+                 "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+                 "sPaginationType": "bootstrap",
+                 "aaSorting": [[0, "asc"]],
+                 "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                 "oLanguage": {
+                     "sEmptyTable": "ไม่มีข้อมูล",
+                     "sLengthMenu": "_MENU_ รายการต่อหน้า",
+                     "sInfo": "แสดงรายการที่ _START_ ถึง _END_ จากทั้งหมด _TOTAL_ รายการ",
+                     "sInfoEmpty": "ไม่มีรายการ",
+                     "sInfoFiltered": "(กรองข้อมูลจากทั้งหมด _MAX_ รายการ)",
+                     "sSearch": "ค้นหา",
+                     "sZeroRecords": "ไม่พบข้อมูลที่ต้องการค้นหา",
+                     "oPaginate": {
+                         "sFirst": "แรกสุด",
+                         "sLast": "ท้ายสุด",
+                         "sNext": "ถัดไป",
+                         "sPrevious": "ก่อนหน้า"
+                     }
+                 }
+             });
+            <%-- $("#<%=GridView1.ClientID%> tr:has(td)").each(function () {
                  var cell2 = $(this).find("td:eq(2)");
                  var cell3 = $(this).find("td:eq(3)");
                  var cell4 = $(this).find("td:eq(4)");
@@ -107,12 +190,15 @@
                  $("#<%=txtUserName.ClientID%>").val(cell2.html());
                  $("#<%=txtDesc.ClientID%>").val(cell3.html());
                  $("#<%=txtPartner.ClientID%>").val(cell4.html());
-                 GetProfileByID($("#<%=txtUserName.ClientID%>").val())
+                 //GetProfileByID($("#<%=txtUserName.ClientID%>").val())
 
-             });
+             });--%>
              return false;
          });
-         
+         $("#btnCreateUser").click(function () {
+             window.location.href = "Register.aspx";
+             return false;
+            });
          $("#btnGenPasswordNew").click(function () {
              $("#result_password").text(GetPasswordRandom());
              return false;
@@ -146,13 +232,14 @@
                 return false;
             }
              return false;
-          });
-           $("#<%=GridView1.ClientID%>").prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable();
+         });
+        
+          <%-- $("#<%=GridView1.ClientID%>").prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable();
             
             $("#<%=GridView1.ClientID%>").DataTable({
                  "retrieve": true,
                 "paging": false
-            });
+            });--%>
 
             function GetPasswordRandom() {
                 var result;
@@ -219,37 +306,9 @@
                 alert(error);
             }
 
-            function GetProfileByID(User) {
-                $("#showresult").html("");
-                $.ajax({
-                    type: "POST",
-                    url: "../WSForMIB.asmx/GetProfileByID",
-                    data: "{User:'" + User + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: GetProfileByIDResultOnSuccess,
-                    error: GetProfileByIDResultOnError
-                });
-            }
-
-            function GetProfileByIDResultOnSuccess(data, status) {
-                var obj = data.d;
-                    if (obj == "Active") {
-                        $('#<%=DropDownStatus.ClientID %>').val(obj).attr('selected', true);
-                    }
-                    else if (obj== "UnActive") {
-                        $('#<%=DropDownStatus.ClientID %>').val(obj).attr('selected', true);
-                    }
-                    else if (obj == "Locked") {
-                        $('#<%=DropDownStatus.ClientID %>').val(obj).attr('selected', true);
-
-                    }
-               
-            }
-            function GetProfileByIDResultOnError(request, status, error) {
-                $(".showresult").html(request.statusText);
-            }
-        });
+           
+     });
+   
     </script>
 
 </asp:Content>

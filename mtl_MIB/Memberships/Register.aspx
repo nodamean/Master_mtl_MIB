@@ -6,7 +6,7 @@
     </p>
 
     <div class="form-horizontal">
-        <h4>Create a new account.</h4>
+        <h4>สร้างผู้ใช้งานใหม่</h4>
         <hr />
         <%--<asp:ValidationSummary runat="server" CssClass="text-danger" />--%>
         <div class="form-group">
@@ -48,7 +48,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-3 col-md-5">
-                <button id="btnRegister" class="btn btn-default" >Register</button>
+                <button id="btnRegister" class="btn btn-primary" >Register</button>
             </div>
         </div>
 
