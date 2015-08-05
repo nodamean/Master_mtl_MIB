@@ -19,6 +19,7 @@ namespace mtl_MIB.Memberships
                 using (var dbContext = new MTL_ForCDDScanEntities())
                 {
                     var user = from m in dbContext.mtl_UserProfiles
+                               where  !m.UserName.ToLower().Contains("admin")
                                select m;
                     foreach (var item in user)
                     {
@@ -34,8 +35,20 @@ namespace mtl_MIB.Memberships
                         string UserName = item.UserName == null ? "" : item.UserName.ToString();
                         tcNo.Text = i.ToString();
                         string PartnerID = "", PartnerDesc = "";
-                        PartnerID = item.PartnerID == null ? "" : item.PartnerID.ToString();
-                        PartnerDesc = item.Description == null ? "" : item.Description.ToString();
+                        if (item.Description.Contains(":"))
+                        {
+                            string[] part = item.Description.Split(':');
+                            PartnerDesc = part[1] == null ? "" : part[1].ToString();
+                            PartnerID =part[0] == null ? "" : part[0].ToString();
+
+                        }
+                        else
+                        {
+                            PartnerDesc = item.Description == null ? "" : item.Description.ToString();
+                            PartnerID = item.PartnerID == null ? "" : item.PartnerID.ToString();
+
+                        }
+                        
 
                         tcView.Text = "<button type='button' class='btn btn-primary btn-sm' value='" + UserName + "'  data-toggle='modal'  data-target='#mdChangePassword'  onclick='GetProfileByID(\"" + UserName + "\");'><span class='glyphicon glyphicon-edit'></span></button>";
                         tcUsername.Text = UserName;

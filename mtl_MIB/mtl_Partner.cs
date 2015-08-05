@@ -16,5 +16,7 @@ namespace mtl_MIB
     {
         public string PartnerID { get; set; }
         public string Description { get; set; }
+        public string ShowNotFound { get; set; }
+        public string ShowFound { get; set; }
     }
 }

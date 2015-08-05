@@ -14,6 +14,7 @@
         <asp:ValidationSummary runat="server"  CssClass="text-danger" />
        <div class="form-group">
            <asp:HiddenField ID="HiddenField_UserID" runat="server" />
+            <asp:HiddenField ID="HiddenField_PartnerID" runat="server" />
             <asp:Label runat="server" AssociatedControlID="dryTypeID" CssClass="col-md-2 control-label">ประเภทบัตร</asp:Label>
             <div class="col-md-10">
                    <asp:DropDownList ID="dryTypeID" runat="server"  CssClass="col-md-2 control-label">
@@ -156,18 +157,19 @@
                   $("#span_result2").html('');
                   $("#span_result1").html('');
                  setTimeout(function () {
-                     var obj = GetClientByNameAndPIDForMIB2($("#<%=txtName.ClientID%>").val(), $("#<%=txtSurname.ClientID%>").val(), $("#<%=txtID.ClientID%>").val(), $("#<%=HiddenField_UserID.ClientID %>").val(), $("#<%=dryTypeID.ClientID %> option:selected").text());
+                     var obj = GetClientByNameAndPIDForMIB2($("#<%=txtName.ClientID%>").val(), $("#<%=txtSurname.ClientID%>").val(), $("#<%=txtID.ClientID%>").val(), $("#<%=HiddenField_UserID.ClientID %>").val(), $("#<%=dryTypeID.ClientID %> option:selected").text(), $("#<%=HiddenField_PartnerID.ClientID %>").val());
                      if (obj.length > 0) {
                          for (var i = 0; i < obj.length; i++) {
                              if (obj[i].fld_result == "found") {
-                                 $("#span_result2").html("ไม่รับ");
+                                 $("#span_result2").html(obj[i].fld_result_show.toString().trim());
                                  $("#log_id").html(obj[i].refrow.toString().trim());
                                  $("#log_date").html(Date(parseInt(obj[i].logdatetime)).toString().replace('GMT+0700 (SE Asia Standard Time)', ''));
                                  $("#log_username").html(obj[i].username.toUpperCase());
                                  $("#log_keyword").html('หมายเลขระบุตัวตน:'+ obj[i].fld_pid_number  +'<br/>ชื่อ:'+obj[i].fld_first_name +'<br/>นามสกุล:'+obj[i].fld_last_name);
+
                              }
                              else if (obj[i].fld_result == "notfound") {
-                                 $("#span_result1").html("นำเสนอแผน1");
+                                 $("#span_result1").html(obj[i].fld_result_show.toString().trim());
                                  $("#log_id").html(obj[i].refrow.toString().trim());
                                  $("#log_date").html(Date(parseInt(obj[i].logdatetime)).toString().replace('GMT+0700 (SE Asia Standard Time)',''));
                                  $("#log_username").html(obj[i].username.toUpperCase());
@@ -219,12 +221,12 @@
 
             // === BEG: Get Web Services: Check MIB === //
 
-            function GetClientByNameAndPIDForMIB2(fld_first_name, fld_last_name, fld_pid_number,username,type) {
+            function GetClientByNameAndPIDForMIB2(fld_first_name, fld_last_name, fld_pid_number,username,type,partnerid) {
                 var result;
                 $.ajax({
                     type: "POST",
                     url: "WSForMIB.asmx/GetClientByNameAndPIDForMIB2",
-                    data: "{fld_first_name:'" + fld_first_name + "' , fld_last_name:'"+fld_last_name +"',fld_pid_number:'" + fld_pid_number+"',username:'"+username + "',type:'"+type+"'  }",
+                    data: "{fld_first_name:'" + fld_first_name + "' , fld_last_name:'"+fld_last_name +"',fld_pid_number:'" + fld_pid_number+"',username:'"+username + "',type:'"+type+"' ,partnerid:'"+partnerid+"' }",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     processData:false,
@@ -253,14 +255,14 @@
                 $("#ctl01").validate({
                     rules: {
                         ctl00$MainContent$txtID: { required: true },
-                        ctl00$MainContent$txtName: { required: true, minlength: 3 },
-                        ctl00$MainContent$txtSurname: { required: true, minlength: 3 }
+                        ctl00$MainContent$txtName: { required: true, minlength: 2 },
+                        ctl00$MainContent$txtSurname: { required: true, minlength: 2 }
 
                     },
                     messages: {
                         ctl00$MainContent$txtID: { required: "*"},
-                        ctl00$MainContent$txtName: { required: "*", minlength: "กรุณาระบุมากกว่า 2 ตัวอักษรขึ้นไป" },
-                        ctl00$MainContent$txtSurname: { required: "*", minlength: "กรุณาระบุมากกว่า 2 ตัวอักษรขึ้นไป" }
+                        ctl00$MainContent$txtName: { required: "*", minlength: "กรุณาระบุมากกว่า 1 ตัวอักษรขึ้นไป" },
+                        ctl00$MainContent$txtSurname: { required: "*", minlength: "กรุณาระบุมากกว่า 1 ตัวอักษรขึ้นไป" }
                     }
                     ,
                     ignore: "",

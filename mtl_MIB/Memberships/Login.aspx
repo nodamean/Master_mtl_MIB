@@ -1,5 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"  CodeBehind="Login.aspx.cs" Inherits="mtl_MIB.Memberships.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    
+    <div class="jumbotron" id="logo">
+        <h4>ระบบเมืองไทย MIB Online</h4>
+        <p class="lead"> </p>
+    </div>
+      
      <asp:Login Width="100%" ID="Login_MIB" runat="server" OnAuthenticate="Login_MIB_Authenticate" DestinationPageUrl="~/Default.aspx">
             <LayoutTemplate>
             <h2>เข้าสู่ระบบ</h2>
@@ -28,14 +34,12 @@
 <%--                    <a id="GoToForgotPassword" href="Membership/ForgetPassword.aspx">ลืมรหัสผ่าน?</a>--%>
                        <a  id="lnkChangePassword"  runat="server" data-toggle="modal" data-target="#mdChangePassword" href="#" class="bth bth-primary" visible="false">เปลี่ยนรหัสผ่าน</a>
                     </div>
-                   
                 </div>
             </div>
             </LayoutTemplate>
         </asp:Login>
                     <div>
                    </div>
-
     <!-- Modal -->
 <div id="mdChangePassword" class="modal fade" role="dialog">
   <div class="modal-dialog">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mtl_MIB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,15 @@ public partial class _Default : System.Web.UI.Page
         {
            // Guid currentUserId = (Guid)memberUser1.ProviderUserKey;
             HiddenField_UserID.Value = username1.ToString();
+            using (var dbContext = new MTL_ForCDDScanEntities())
+            {
+                var q = (from a in dbContext.mtl_UserProfiles
+                         where a.UserName == username1
+                         select a).First();
+                HiddenField_PartnerID.Value = q.PartnerID == null ? "" : q.PartnerID.ToString().ToUpper();
+                
+            }
+
         }
     }
     

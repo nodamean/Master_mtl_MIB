@@ -73,9 +73,9 @@ namespace mtl_MIB.WS_Admin_ForMIB {
         public event GetClientByNameAndPIDForMIB2CompletedEventHandler GetClientByNameAndPIDForMIB2Completed;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetClientByNameAndPIDForMIB2", RequestNamespace="http://tempuri.org/", ResponseElementName="GetClientByNameAndPIDForMIB2_Response", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("fld_result")]
-        public string GetClientByNameAndPIDForMIB2(string fld_admin_username, string fld_admin_password, string fld_operator_username, string fld_operator_password, string fld_first_name, string fld_last_name, string fld_pid_number, out string fld_session_id) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetClientByNameAndPIDForMIB2", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
+        [return: System.Xml.Serialization.XmlElementAttribute("fld_result", Namespace="http://tempuri.org/")]
+        public string GetClientByNameAndPIDForMIB2([System.Xml.Serialization.XmlElementAttribute(Namespace="http://tempuri.org/")] string fld_admin_username, [System.Xml.Serialization.XmlElementAttribute(Namespace="http://tempuri.org/")] string fld_admin_password, [System.Xml.Serialization.XmlElementAttribute(Namespace="http://tempuri.org/")] string fld_operator_username, [System.Xml.Serialization.XmlElementAttribute(Namespace="http://tempuri.org/")] string fld_operator_password, [System.Xml.Serialization.XmlElementAttribute(Namespace="http://tempuri.org/")] string fld_first_name, [System.Xml.Serialization.XmlElementAttribute(Namespace="http://tempuri.org/")] string fld_last_name, [System.Xml.Serialization.XmlElementAttribute(Namespace="http://tempuri.org/")] string fld_pid_number, [System.Xml.Serialization.XmlElementAttribute(Namespace="http://tempuri.org/")] out string fld_session_id) {
             object[] results = this.Invoke("GetClientByNameAndPIDForMIB2", new object[] {
                         fld_admin_username,
                         fld_admin_password,

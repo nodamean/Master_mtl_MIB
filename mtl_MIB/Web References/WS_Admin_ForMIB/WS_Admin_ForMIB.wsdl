@@ -2,34 +2,29 @@
 <definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <xsd:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
-      <xsd:element name="GetClientByNameAndPIDForMIB2">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="0" maxOccurs="1" name="fld_admin_username" type="xsd:string" />
-            <xsd:element minOccurs="0" maxOccurs="1" name="fld_admin_password" type="xsd:string" />
-            <xsd:element minOccurs="0" maxOccurs="1" name="fld_operator_username" type="xsd:string" />
-            <xsd:element minOccurs="0" maxOccurs="1" name="fld_operator_password" type="xsd:string" />
-            <xsd:element minOccurs="0" maxOccurs="1" name="fld_first_name" type="xsd:string" />
-            <xsd:element minOccurs="0" maxOccurs="1" name="fld_last_name" type="xsd:string" />
-            <xsd:element minOccurs="0" maxOccurs="1" name="fld_pid_number" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="GetClientByNameAndPIDForMIB2_Response">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="0" maxOccurs="1" name="fld_result" type="xsd:string" />
-            <xsd:element minOccurs="0" maxOccurs="1" name="fld_session_id" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
+      <xsd:element name="fld_admin_username" type="xsd:string" />
+      <xsd:element name="fld_admin_password" type="xsd:string" />
+      <xsd:element name="fld_operator_username" type="xsd:string" />
+      <xsd:element name="fld_operator_password" type="xsd:string" />
+      <xsd:element name="fld_first_name" type="xsd:string" />
+      <xsd:element name="fld_last_name" type="xsd:string" />
+      <xsd:element name="fld_pid_number" type="xsd:string" />
+      <xsd:element name="fld_result" type="xsd:string" />
+      <xsd:element name="fld_session_id" type="xsd:string" />
     </xsd:schema>
   </types>
   <message name="GetClientByNameAndPIDForMIB2Input">
-    <part name="parameters" element="tns:GetClientByNameAndPIDForMIB2" />
+    <part name="arg1" element="tns:fld_admin_username" />
+    <part name="arg2" element="tns:fld_admin_password" />
+    <part name="arg3" element="tns:fld_operator_username" />
+    <part name="arg4" element="tns:fld_operator_password" />
+    <part name="arg5" element="tns:fld_first_name" />
+    <part name="arg6" element="tns:fld_last_name" />
+    <part name="arg7" element="tns:fld_pid_number" />
   </message>
   <message name="GetClientByNameAndPIDForMIB2Output">
-    <part name="parameters" element="tns:GetClientByNameAndPIDForMIB2_Response" />
+    <part name="arg1" element="tns:fld_result" />
+    <part name="arg2" element="tns:fld_session_id" />
   </message>
   <portType name="WS_Admin_ForMIBPortType">
     <operation name="GetClientByNameAndPIDForMIB2">
@@ -53,7 +48,7 @@
     <documentation>
     </documentation>
     <port name="WS_Admin_ForMIBPort" binding="tns:WS_Admin_ForMIBSoapBinding">
-      <soap:address location="http://10.1.0.24:2380/applinx/wrapped-service/WS_Admin_DEV/WS_Admin_ForMIB" />
+      <soap:address location="http://10.1.0.24:2380/applinx/bare-service/WS_Admin/WS_Admin_ForMIB" />
     </port>
   </service>
 </definitions>
