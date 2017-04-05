@@ -31,11 +31,11 @@ namespace mtl_MIB.Memberships
                 //{
                 //    Response.Redirect("~/UnauthorizedAccess.aspx");
                 //}
-                MembershipUser u = Membership.GetUser("nodamean");
-                if (Membership.ValidateUser("nodamean", "220349"))
-                {
+                //MembershipUser u = Membership.GetUser("nodamean");
+                //if (Membership.ValidateUser("nodamean", "220349"))
+                //{
                     
-                }
+                //}
             }
         }
         protected void Login_MIB_Authenticate(object sender, AuthenticateEventArgs e)
