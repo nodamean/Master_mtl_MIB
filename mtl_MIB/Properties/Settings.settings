@@ -5,5 +5,8 @@
     <Setting Name="mtl_MIB_WS_Admin_ForMIB_WS_Admin_ForMIBService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://10.1.0.24:2380/applinx/bare-service/WS_Admin/WS_Admin_ForMIB</Value>
     </Setting>
+    <Setting Name="mtl_MIB_WS_Admin_ForMIB_V9_WS_Admin_WS_Admin_ForMIB" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.200.52.114:2380/wsstack/services/WS_Admin.WS_Admin_ForMIB/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

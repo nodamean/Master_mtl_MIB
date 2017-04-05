@@ -278,6 +278,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
     <None Include="Web References\WS_Admin_ForMIB\WS_Admin_ForMIB.wsdl" />
+    <Content Include="Web References\WS_Admin_ForMIB_V9\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\WS_Admin_ForMIB_V9\WS_Admin.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -532,6 +537,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\WS_Admin_ForMIB_V9\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="WSForMIB.asmx.cs">
       <DependentUpon>WSForMIB.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -564,6 +574,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>mtl_MIB_WS_Admin_ForMIB_WS_Admin_ForMIBService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.200.52.114:2380/wsstack/services/WS_Admin.WS_Admin_ForMIB%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WS_Admin_ForMIB_V9\</RelPath>
+      <UpdateFromURL>http://10.200.52.114:2380/wsstack/services/WS_Admin.WS_Admin_ForMIB%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>mtl_MIB_WS_Admin_ForMIB_V9_WS_Admin_WS_Admin_ForMIB</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>

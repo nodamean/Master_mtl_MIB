@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <xsd:element name="GetClientByNameAndPIDForMIB2">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="fld_admin_username" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="fld_admin_password" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="fld_operator_username" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="fld_operator_password" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="fld_first_name" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="fld_last_name" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="fld_pid_number" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetClientByNameAndPIDForMIB2_Response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="fld_result" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="fld_session_id" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetClientByNameAndPIDForMIB2Input">
+    <wsdl:part name="parameters" element="tns:GetClientByNameAndPIDForMIB2" />
+  </wsdl:message>
+  <wsdl:message name="GetClientByNameAndPIDForMIB2Output">
+    <wsdl:part name="parameters" element="tns:GetClientByNameAndPIDForMIB2_Response" />
+  </wsdl:message>
+  <wsdl:portType name="WS_Admin_ForMIBPortType">
+    <wsdl:operation name="GetClientByNameAndPIDForMIB2">
+      <wsdl:input message="tns:GetClientByNameAndPIDForMIB2Input" />
+      <wsdl:output message="tns:GetClientByNameAndPIDForMIB2Output" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WS_Admin_ForMIBBinding" type="tns:WS_Admin_ForMIBPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetClientByNameAndPIDForMIB2">
+      <soap:operation soapAction="urn:http://tempuri.org/GetClientByNameAndPIDForMIB2" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WS_Admin.WS_Admin_ForMIB">
+    <wsdl:port name="WS_Admin_ForMIBPort" binding="tns:WS_Admin_ForMIBBinding">
+      <soap:address location="http://10.200.52.114:2380/wsstack/services/WS_Admin.WS_Admin_ForMIB/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
