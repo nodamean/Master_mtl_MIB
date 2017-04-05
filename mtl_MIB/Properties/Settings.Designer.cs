@@ -26,20 +26,20 @@ namespace mtl_MIB.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://10.1.0.24:2380/applinx/bare-service/WS_Admin/WS_Admin_ForMIB")]
-        public string mtl_MIB_WS_Admin_ForMIB_WS_Admin_ForMIBService {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://10.200.52.114:2380/wsstack/services/WS_Admin.WS_Admin_ForMIB/")]
+        public string mtl_MIB_WS_Admin_ForMIB_WS_Admin_WS_Admin_ForMIB {
             get {
-                return ((string)(this["mtl_MIB_WS_Admin_ForMIB_WS_Admin_ForMIBService"]));
+                return ((string)(this["mtl_MIB_WS_Admin_ForMIB_WS_Admin_WS_Admin_ForMIB"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://10.200.52.114:2380/wsstack/services/WS_Admin.WS_Admin_ForMIB/")]
-        public string mtl_MIB_WS_Admin_ForMIB_V9_WS_Admin_WS_Admin_ForMIB {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://10.1.0.24:2380/applinx/bare-service/WS_Admin/WS_Admin_ForMIB")]
+        public string mtl_MIB_WS_Admin_ForMIB_WS_Admin_ForMIBService {
             get {
-                return ((string)(this["mtl_MIB_WS_Admin_ForMIB_V9_WS_Admin_WS_Admin_ForMIB"]));
+                return ((string)(this["mtl_MIB_WS_Admin_ForMIB_WS_Admin_ForMIBService"]));
             }
         }
     }
